@@ -21,7 +21,7 @@
         $feature10_name = $results_features['feature10_name'];
 		
     ?>
-		<title>Mining Hardware Comparison</title>
+		<title>Miningspeed.com - compare your mining speed with other users</title>
 		<meta name="description" content="<?php echo $seo_description; ?>">
     	<meta name="google-site-verification" content="" />
 		<meta property="og:title" content="<?php echo $seo_title; ?>" />
@@ -30,7 +30,8 @@
     	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     	<link rel="stylesheet" type="text/css" href="../src/bootstrap-wysihtml5.css" />
     	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css"/>
-
+<!-- ReCaptcha -->  
+   <script src='https://www.google.com/recaptcha/api.js'></script>
 		 <style type="text/css">
                 .row{
                 margin-top:10px;
@@ -88,7 +89,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                       </button>
-                      <a class="navbar-brand" href="index.php">Mining Hardware Comparison <span style="font-size:small">Beta</span></a>
+                      <a class="navbar-brand" href="index.php">Miningspeed<span style="font-size:small">.com</span></a>
                     </div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                       <ul style="margin-left: 50px;" class="nav navbar-nav">
