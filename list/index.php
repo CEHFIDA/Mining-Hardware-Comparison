@@ -6,10 +6,12 @@
       			<?php
 					
 					// your secret key
-					$secret = "";
-					$response = null;
+					$secret = "6LeogSkTAAAAALiZGD08VuI7cugRGcRtZV5geQbX";
+					$response=$_POST["g-recaptcha-response"];
 					$reCaptcha = new ReCaptcha($secret);
-		
+					$verify=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$secret}&response={$response}");
+					$captcha_success=json_decode($verify);
+					
 					if (!empty($_POST['submission'])) 
 					{
 						if (empty($_POST['name'])) 
@@ -116,21 +118,14 @@
 																'link' => $link,
 																'username' => $username, ));
 								
-								if ($_POST["g-recaptcha-response"]) 
-								{
-									$response = $reCaptcha->verifyResponse(
-										$_SERVER["REMOTE_ADDR"],
-										$_POST["g-recaptcha-response"]
-									);
+								 if ($captcha_success->success==false) {
+           							echo '<div class="alert alert-success">We have succesfully received your submission. We will activate it as soon as possible!</div>';
+
+       								}
+       								else if ($captcha_success->success==true) { 
+							echo '<div class="alert alert-success">We have succesfully received your submission. We will activate it as soon as possible!</div>';
 								}
-								if ($response != null && $response->success) 
-								{
-									if ($insert) {
-										echo '<div class="alert alert-success">We have succesfully received your submission. We will activate it as soon as possible!</div>';
-									} else {
-										echo '<div class="alert alert-warning">Error. Please try again.</div>';
-									}
-								} 
+						
 							}
 					}
 				?>
@@ -449,30 +444,15 @@
                                         ?> required>
                                       </div>
                                     </div>
-                                    <!--
-                                    <div class="form-group">
-                                      <label class="col-md-4 control-label" for="description">Description</label>
-                                      <div class="col-md-4">
-                                        <textarea class="textarea form-control" id="description" name="description" placeholder="Enter text ..." style="height: 200px"><?php /*?><?php if(!empty($description)){ echo $description; } ?><?php */?></textarea>
-                                      </div>
-                                    </div>-->
-                                    
-                                    <!--<div class="form-group">
-                                         <label class="col-md-4 control-label" id="captchaOperation"></label>
-                                            <div class="col-md-5">
-                                          <input type="text" class="form-control" name="captcha" />
-                                       </div>
-                                    </div>-->
-                                    
                                     <!-- Button -->
                                     <div class="form-group">
                                       <label class="col-md-4 control-label" for="singlebutton"></label>
-                                      <div class="g-recaptcha" data-sitekey="6LdbLiATAAAAAAMBxkNB0bZ00kjELXco4O9Q5keO"></div>
+                                      <div class="g-recaptcha" data-sitekey="6LeogSkTAAAAAEkzZnFeDgeeXu6sQRr4YrZhi2S0" ></div>
                                       <div class="col-md-4">
                                         <input type="submit" class="btn btn-default btn-primary btn-lg" name="submission" value="Submit"/>
                                       </div>
                                     </div>
-                                    
+                                
                                     </fieldset>
                                     <input type="hidden" name="num_top" value="<?php echo $top_number;?>">
                                     </form>
@@ -708,7 +688,7 @@
                           <p style="text-align:center; font-size:medium; color:#0C0;">
                           You can use the filter options to filter for your specific need. <br />
                           Just enter something in the search box on top of every list view. <br />
-                          You can also click on the column headers to sort Ascending or Descending.
+                          You can also click on the column headers to sort Ascending or Descending. 
                           <br /><br />
                           
                           Thank you!</p>
